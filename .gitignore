@@ -1,0 +1,28 @@
+# Python
+get-pip.py
+backend/get-pip.py
+__pycache__/
+*.py[cod]
+*.sqlite3
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Django
+backend/media/
+backend/db.sqlite3
+backend/.env
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+*.log
