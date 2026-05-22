@@ -76,13 +76,6 @@ npm run dev
 
 App: `http://localhost:5173`
 
-## Sample accounts (after `seed_demo`)
-
-| Role | Username | Password |
-|------|----------|----------|
-| Admin | `admin` | `admin123` |
-| Voter | `voter1` | `voter123` |
-| Voter | `voter2` | `voter123` |
 
 ## Core API endpoints
 
