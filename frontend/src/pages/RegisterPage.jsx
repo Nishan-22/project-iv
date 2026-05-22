@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
 import { alertError, btnPrimary, card, input, label } from "../lib/ui.js";
+import { getApiErrorMessage } from "../utils/apiError.js";
 
 const FIELDS = [
   { key: "username", label: "Username" },
   { key: "email", label: "Email", type: "email" },
-  { key: "password", label: "Password", type: "password" },
+  { key: "password", label: "Password (min. 6 characters)", type: "password" },
   { key: "first_name", label: "First name" },
   { key: "last_name", label: "Last name" },
   { key: "student_id", label: "Student ID" },
@@ -36,9 +37,19 @@ export function RegisterPage() {
     setError(null);
     try {
       await register(form);
-      navigate("/");
-    } catch {
-      setError("Registration failed. Username or student ID may already exist.");
+      navigate("/login", {
+        state: {
+          registered: true,
+          username: form.username,
+        },
+      });
+    } catch (err) {
+      setError(
+        getApiErrorMessage(
+          err,
+          "Registration failed. Check your details and try again."
+        )
+      );
     }
   }
 

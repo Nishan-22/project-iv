@@ -1,12 +1,16 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
-import { alertError, btnPrimary, card, input, label } from "../lib/ui.js";
+import { alertError, alertSuccess, btnPrimary, card, input, label } from "../lib/ui.js";
+import { getApiErrorMessage } from "../utils/apiError.js";
 
 export function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const location = useLocation();
+  const registered = location.state?.registered;
+  const registeredUsername = location.state?.username ?? "";
+  const [username, setUsername] = useState(registeredUsername);
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
@@ -18,8 +22,8 @@ export function LoginPage() {
     try {
       await login(username, password);
       navigate("/");
-    } catch {
-      setError("Invalid username or password.");
+    } catch (err) {
+      setError(getApiErrorMessage(err, "Invalid username or password."));
     } finally {
       setSubmitting(false);
     }
@@ -34,6 +38,11 @@ export function LoginPage() {
             Secure online elections for your university club
           </p>
         </div>
+        {registered && (
+          <div className={`${alertSuccess} mb-4`}>
+            Account created successfully. Sign in with your username and password.
+          </div>
+        )}
         <form onSubmit={handleSubmit} className={`${card} space-y-4`}>
           <label className={label}>
             Username

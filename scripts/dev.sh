@@ -3,7 +3,7 @@ set -euo pipefail
 ROOT="$(dirname "$0")/.."
 
 cd "$ROOT/backend"
-.venv/bin/python manage.py runserver 127.0.0.1:8000 &
+.venv/bin/python manage.py runserver 0.0.0.0:8000 &
 BACKEND_PID=$!
 
 cd "$ROOT/frontend"

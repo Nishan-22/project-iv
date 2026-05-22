@@ -44,13 +44,9 @@ export function AuthProvider({ children }) {
     [refreshUser]
   );
 
-  const register = useCallback(
-    async (payload) => {
-      await api.post("/auth/register/", payload);
-      await login(payload.username, payload.password);
-    },
-    [login]
-  );
+  const register = useCallback(async (payload) => {
+    await api.post("/auth/register/", payload);
+  }, []);
 
   const logout = useCallback(() => {
     localStorage.removeItem("access_token");
