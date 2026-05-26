@@ -105,6 +105,4 @@ App: `http://localhost:5173`
 | MetaMask wallet linking | Signed blockchain transactions |
 | Django application layer | Smart contract trust layer |
 
-## Open in Cursor
 
-**File → Open Folder** → `/home/nishan/Desktop/club-voting-system`
